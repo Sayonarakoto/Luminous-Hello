@@ -1,231 +1,277 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize AOS
-    AOS.init({
-        duration: 1000,
-        once: true,
-        mirror: false,
-    });
-
-    // GSAP Hero Animations
-    gsap.from(".hero-title", {
-        opacity: 0,
-        y: 50,
-        scale: 0.9,
-        duration: 1,
-        ease: "power3.out"
-    });
-    gsap.from(".hero-subtitle", {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 0.3,
-        ease: "power3.out"
-    });
-    gsap.from(".hero-button", {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        delay: 0.6,
-        ease: "power3.out"
-    });
-    gsap.from(".scroll-indicator", {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        delay: 1,
-        ease: "power3.out"
-    });
-
-    // Header Slide-down Animation
-    gsap.to(".fixed-header", {
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: 0.2,
-        onComplete: () => {
-            document.querySelector('.fixed-header').classList.add('header-visible');
-        }
-    });
-
-    // Mobile Menu Toggle
+    // --- Original index.html functionality ---
+    // Burger menu toggle
     const burgerMenu = document.querySelector('.burger-menu');
     const navLinks = document.querySelector('.nav-links');
-
-    burgerMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        burgerMenu.classList.toggle('toggle');
-    });
-
-    // Close mobile menu when a link is clicked
-    document.querySelectorAll('.nav-links li a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks.classList.contains('nav-active')) {
-                navLinks.classList.remove('nav-active');
-                burgerMenu.classList.remove('toggle');
-            }
+    if (burgerMenu && navLinks) {
+        burgerMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            burgerMenu.classList.toggle('toggle');
         });
-    });
+    }
 
-    // Developer Team Section Animations
-    const developers = [
-        { name: "Alice", role: "Frontend", bio: "Expert in React & UI design", avatar: "public/images/avatar-alice.png" },
-        { name: "Bob", role: "Backend", bio: "Node.js & MongoDB specialist", avatar: "public/images/avatar-bob.png" },
-        { name: "Charlie", role: "Fullstack", bio: "Handles both frontend and backend", avatar: "public/images/avatar-charlie.png" },
-        { name: "David", role: "UX/UI", bio: "Designs smooth user experience", avatar: "public/images/avatar-david.png" },
-        { name: "Eve", role: "QA", bio: "Ensures bug-free software", avatar: "public/images/avatar-eve.png" },
-        { name: "Frank", role: "DevOps", bio: "Automates deployment & servers", avatar: "public/images/avatar-frank.png" },
-        { name: "Grace", role: "Mobile", bio: "Mobile app specialist", avatar: "public/images/avatar-grace.png" },
-        { name: "Hank", role: "AI/ML", bio: "Integrates AI features", avatar: "public/images/avatar-hank.png" },
-        { name: "Ivy", role: "Project Manager", bio: "Coordinates team & roadmap", avatar: "public/images/avatar-ivy.png" }
-    ];
-
-    // Function to create developer cards (if not already in HTML)
-    // Since cards are already in HTML, we'll just animate them.
-
-    // Staggered fade-in for dev cards (AOS is already handling this, but we can add more with anime.js if needed)
-    // For now, AOS data-aos="fade-up" and data-aos-delay is sufficient for staggered load.
-
-    // Hover effects for dev cards
-    document.querySelectorAll('.dev-card').forEach(card => {
-        let isFlipped = false;
-        const devAvatar = card.querySelector('.dev-avatar');
-
-        card.addEventListener('mouseenter', () => {
-            anime({
-                targets: card,
-                translateY: -10,
-                scale: 1.02,
-                duration: 300,
-                easing: 'easeOutExpo'
-            });
-            anime({
-                targets: devAvatar,
-                scale: 1.05,
-                duration: 300,
-                easing: 'easeOutExpo'
-            });
-
-            // Add mousemove listener for tilt effect
-            card.addEventListener('mousemove', handleTilt);
+    // AOS initialization
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            once: true
         });
+    }
 
-        card.addEventListener('mouseleave', () => {
-            anime({
-                targets: card,
-                translateY: 0,
-                scale: 1,
-                rotateX: 0, // Reset tilt
-                rotateY: 0, // Reset tilt
-                duration: 300,
-                easing: 'easeOutExpo'
-            });
-            anime({
-                targets: devAvatar,
-                scale: 1,
-                duration: 300,
-                easing: 'easeOutExpo'
-            });
-
-            // Remove mousemove listener
-            card.removeEventListener('mousemove', handleTilt);
-        });
-
-        function handleTilt(e) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left; // x position within the element.
-            const y = e.clientY - rect.top;  // y position within the element.
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / centerY * 10; // Max tilt 10deg
-            const rotateY = (x - centerX) / centerX * -10; // Max tilt -10deg
-
-            anime({
-                targets: card,
-                rotateX: rotateX,
-                rotateY: rotateY,
-                duration: 50, // Smooth transition for tilt
-                easing: 'linear',
-                autoplay: true
-            });
-        }
-
-        // Flip card for bio on click
+    // Team card flip logic (for .dev-card in index.html)
+    const devCards = document.querySelectorAll('.dev-card');
+    devCards.forEach(card => {
         card.addEventListener('click', () => {
             card.classList.toggle('is-flipped');
         });
 
-        // Idle float animation
-        const floatAnimation = anime({
+        // Idle Floating Effect for .dev-card
+        anime({
             targets: card,
-            translateY: ['-5px', '5px'], // Move up and down by 5px
-            duration: 3000,
-            easing: 'easeInOutSine',
+            translateY: ['-3px', '3px'],
             direction: 'alternate',
             loop: true,
-            autoplay: true,
-            // Stagger the start of each card's animation
-            delay: anime.random(0, 1000) // Random delay between 0 and 1000ms
+            easing: 'easeInOutSine',
+            duration: 3000 + Math.random() * 1000 // Randomize duration slightly
         });
+    });
 
-        // Pause float animation on hover and resume on mouseleave
-        card.addEventListener('mouseenter', () => {
-            floatAnimation.pause();
+    // --- Particle Network Background (using particles.js) ---
+    // Initialize particles.js on the #particles-js element from index.html
+    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
+        particlesJS('particles-js', { // Target #particles-js
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00bcd4" // Neon blue
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg", // Ensure this path is correct if used
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00bcd4",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    }
+
+    // --- Parallax on Mouse Move ---
+    // Note: index.html uses #particles-js for background, not #background-animation
+    const particlesJsContainer = document.getElementById('particles-js');
+    const mainContent = document.querySelector('.main-content'); // This might not exist in index.html directly
+
+    document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        const offsetX = (mouseX - centerX) / centerX;
+        const offsetY = (mouseY - centerY) / centerY;
+
+        // Apply parallax to particles.js background
+        if (particlesJsContainer) {
+            particlesJsContainer.style.transform = `translate(${offsetX * 10}px, ${offsetY * 10}px)`;
+        }
+
+        // Apply subtle parallax to main content (if .main-content exists in index.html)
+        // For index.html, we might want to apply this to sections or the body itself
+        // For now, let's target the body or a more general container if needed.
+        // If mainContent is null, this won't cause an error.
+        if (mainContent) {
+            mainContent.style.transform = `translate(${offsetX * -5}px, ${offsetY * -5}px)`;
+        } else {
+            // Fallback for index.html if .main-content is not used
+            document.body.style.transform = `translate(${offsetX * -5}px, ${offsetY * -5}px)`;
+        }
+    });
+
+    // --- Neon Cursor Trail ---
+    const cursorTrailContainer = document.getElementById('cursor-trail');
+    const trailColors = ['#00bcd4', '#00e676', '#ffeb3b', '#ff4081']; // Neon colors
+
+    if (cursorTrailContainer) {
+        document.addEventListener('mousemove', (e) => {
+            const particle = document.createElement('div');
+            particle.classList.add('trail-particle');
+            cursorTrailContainer.appendChild(particle);
+
+            const size = Math.random() * 5 + 5; // Size between 5 and 10
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${e.clientX - size / 2}px`;
+            particle.style.top = `${e.clientY - size / 2}px`;
+            particle.style.backgroundColor = trailColors[Math.floor(Math.random() * trailColors.length)];
+
+            anime({
+                targets: particle,
+                opacity: [1, 0],
+                scale: [0, 1],
+                translateX: () => anime.random(-10, 10),
+                translateY: () => anime.random(-10, 10),
+                duration: 800,
+                easing: 'easeOutQuad',
+                complete: () => {
+                    particle.remove();
+                }
+            });
+        });
+    }
+
+
+    // --- Tilt Effects on Developer Cards ---
+    // This applies to .developer-card from workflow.html, but also .dev-card from index.html
+    const allTiltCards = document.querySelectorAll('.developer-card, .dev-card');
+
+    allTiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2;
+            const cardCenterY = cardRect.top + cardRect.height / 2;
+
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            const rotateX = (mouseY - cardCenterY) / cardRect.height * 30; // Max 30 degrees
+            const rotateY = (mouseX - cardCenterX) / cardRect.width * -30; // Max 30 degrees
+
+            card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
         });
 
         card.addEventListener('mouseleave', () => {
-            floatAnimation.play();
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
         });
     });
 
-    // Optional: Lenis for smooth scrolling
-    /*
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
-        direction: 'vertical', // vertical, horizontal
-        gestureDirection: 'vertical', // vertical, horizontal, both
-        smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-    });
+    // --- Scroll Animations (Fade + Slide) ---
+    // AOS is already handling scroll animations for index.html.
+    // This custom scroll animation will be redundant or conflict.
+    // I will disable this custom scroll animation for now, relying on AOS.
+    // If the user wants to replace AOS with this, they should remove AOS links.
 
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
+    // const animateOnScroll = (entries, observer) => {
+    //     entries.forEach(entry => {
+    //         if (entry.isIntersecting) {
+    //             anime({
+    //                 targets: entry.target,
+    //                 opacity: [0, 1],
+    //                 translateY: [50, 0],
+    //                 duration: 1000,
+    //                 easing: 'easeOutQuad',
+    //                 delay: 200 // Small delay for better effect
+    //             });
+    //             observer.unobserve(entry.target); // Only animate once
+    //         }
+    //     });
+    // };
 
-    requestAnimationFrame(raf);
-    */
+    // const observer = new IntersectionObserver(animateOnScroll, {
+    //     root: null, // viewport
+    //     threshold: 0.1 // Trigger when 10% of item is visible
+    // });
 
-    // Initialize particles.js
-    particlesJS.load('particles-js', 'particles.json', function() {
-        console.log('particles.js loaded - callback');
-    });
-
-    // Neon Cursor Trail
-    document.addEventListener('mousemove', (e) => {
-        const trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        document.body.appendChild(trail);
-
-        trail.style.left = `${e.clientX}px`;
-        trail.style.top = `${e.clientY}px`;
-
-        anime({
-            targets: trail,
-            scale: [0, 1],
-            opacity: [1, 0],
-            translateX: anime.random(-10, 10),
-            translateY: anime.random(-10, 10),
-            duration: 800,
-            easing: 'easeOutQuad',
-            complete: () => {
-                trail.remove();
-            }
-        });
-    });
+    // // Observe sections or specific elements
+    // const sectionsToAnimate = document.querySelectorAll('.page-title, .developer-grid-container, .workflow-container');
+    // sectionsToAnimate.forEach(section => {
+    //     observer.observe(section);
+    // });
 });
