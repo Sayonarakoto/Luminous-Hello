@@ -541,6 +541,7 @@ a:hover {
     border: 3px solid var(--accent-purple);
     box-shadow: 0 0 15px rgba(176, 106, 255, 0.5);
     transition: all 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Added box-shadow and border-color */
+    overflow: hidden;
 }
 
 .dev-card:hover .dev-avatar {
