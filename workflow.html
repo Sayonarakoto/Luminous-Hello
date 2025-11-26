@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEN-C Workflow Animation</title>
+    <link rel="stylesheet" href="workflow.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="workflow-container">
+        <!-- Alice (Student) -->
+        <div class="character student" id="alice">
+            <div class="avatar"></div>
+            <div class="name-tag">Alice (Student)</div>
+        </div>
+
+        <!-- GEN-C System -->
+        <div class="system-card" id="genc-system">
+            <div class="icon"></div>
+            <div class="name-tag">GEN-C System</div>
+        </div>
+
+        <!-- Prof. Smith (Faculty) -->
+        <div class="character faculty" id="prof-smith">
+            <div class="avatar"></div>
+            <div class="name-tag">Prof. Smith (Faculty)</div>
+        </div>
+
+        <!-- Request Card (Alice) -->
+        <div class="card request-card" id="alice-request-card">
+            <h3>Late Entry Request</h3>
+            <p>Time: <span id="request-time"></span></p>
+            <p>Reason: <span id="request-reason"></span></p>
+        </div>
+
+        <!-- Approval Card (Prof. Smith) -->
+        <div class="card approval-card" id="prof-smith-approval-card">
+            <h3>Latecomer Request from <span id="approval-student-name"></span></h3>
+            <p>Time: <span id="approval-time"></span></p>
+            <p>Reason: <span id="approval-reason"></span></p>
+            <div class="buttons">
+                <button id="approve-btn" class="btn approve">Approve</button>
+                <button id="decline-btn" class="btn decline">Decline</button>
+            </div>
+        </div>
+
+        <!-- Status Pop-up (Alice) -->
+        <div class="card status-popup" id="alice-status-popup">
+            <h3 id="status-title"></h3>
+            <div class="status-icon">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+                <svg class="cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="cross__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="cross__path cross__path--right" fill="none" d="M16,16 l20,20" />
+                    <path class="cross__path cross__path--left" fill="none" d="M16,36 l20,-20" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- SVG for glowing lines -->
+        <svg class="connector-svg">
+            <path id="connector-alice-system" class="connector-line" d="M0 0"></path>
+            <path id="connector-system-prof" class="connector-line" d="M0 0"></path>
+            <path id="connector-prof-alice" class="connector-line" d="M0 0"></path>
+        </svg>
+
+        <button id="reset-btn" class="btn reset-btn">Reset Animation</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="workflow.js"></script>
+</body>
+</html>
