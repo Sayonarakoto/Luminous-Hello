@@ -14,7 +14,7 @@ const DelegationShift = ({ isVisible }) => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center relative">
+    <div className="w-full h-full flex flex-col items-center justify-center relative bg-transparent">
       <p className="absolute top-0 left-0 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
         Authority_Transfer_Protocol
       </p>

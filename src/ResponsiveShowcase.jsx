@@ -81,7 +81,7 @@ export default function ResponsiveShowcase() {
 
   return (
     <section
-      className="min-h-screen flex flex-col items-center justify-center bg-[radial-gradient(circle_at_top,_#05070b,_#020308)] p-4 overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center bg-transparent p-4 overflow-hidden"
     >
         <h2 className="text-gray-100 font-['Inter',_sans-serif] mb-10 [text-shadow:0_0_20px_rgba(0,212,255,0.5)] text-3xl">
             Designed for Every Device

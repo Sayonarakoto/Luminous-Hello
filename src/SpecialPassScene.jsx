@@ -133,7 +133,7 @@ export default function SpecialPassScene() {
   }, []);
 
   return (
-    <section className="py-20 bg-[radial-gradient(ellipse_at_50%_100%,_#2a003a,_#05050f)]">
+    <section className="py-20 bg-transparent">
       {/* Phase 1 & 6: Combined Intro Text */}
       <div className="py-0 px-5 pb-16 max-w-4xl mx-auto text-center">
         <h2 className="text-yellow-300 mb-3 [text-shadow:0_0_16px_rgba(255,221,136,0.9)] text-4xl">

@@ -26,7 +26,7 @@ const WorkflowDemo = () => {
   }, []);
 
   return (
-    <section className="bg-slate-950 py-32 px-5 relative overflow-hidden font-mono">
+    <section className="bg-transparent py-32 px-5 relative overflow-hidden font-mono">
       {/* Editorial Grid Background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />

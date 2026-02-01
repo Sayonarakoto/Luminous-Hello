@@ -108,7 +108,7 @@ export default function LibraryAuditScene() {
   }, []);
 
   return (
-    <section className="min-h-[70vh] flex items-center justify-center gap-10 flex-wrap py-20 px-5">
+    <section className="min-h-[70vh] flex items-center justify-center gap-10 flex-wrap py-20 px-5 bg-transparent">
       <div className="flex-1 basis-[320px] max-w-lg">
         <h2 className="text-pink-400 mb-4 text-3xl">
           Library & Immutable Audit

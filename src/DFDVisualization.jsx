@@ -27,7 +27,7 @@ const DFDVisualization = ({ isVisible }) => {
   ];
 
   return (
-    <div className="h-full flex flex-col justify-around items-center p-4 font-mono relative">
+    <div className="h-full flex flex-col justify-around items-center p-4 font-mono relative bg-transparent">
       {/* Background Flow Line */}
       <div className="absolute left-1/2 -translate-x-1/2 top-10 bottom-10 w-[1px] bg-slate-800 z-0">
         <div className={`w-full bg-emerald-500 transition-all duration-[2000ms] ${isVisible ? 'h-full' : 'h-0'}`} />

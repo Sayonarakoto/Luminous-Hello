@@ -400,7 +400,7 @@ function HistoryScene() {
 
 export default function LatecomerFeature() {
   return (
-    <section className="bg-gradient-to-b from-[rgba(10,10,10,0.95)] to-[rgba(26,26,46,0.9)] py-20 px-5 font-['Inter',_sans-serif] text-white overflow-hidden relative backdrop-blur-xl">
+    <section className="bg-transparent py-20 px-5 font-['Inter',_sans-serif] text-white overflow-hidden relative backdrop-blur-xl">
       {/* Animated Background Blobs from HeroAnimation */}
       <div className="absolute inset-0 overflow-hidden z-0">
         <motion.div

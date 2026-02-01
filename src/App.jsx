@@ -7,10 +7,12 @@ import SpecialPassScene from "./SpecialPassScene";
 import LibraryAuditScene from "./LibraryAuditScene"; // Import the new component
 import ResponsiveShowcase from "./ResponsiveShowcase";
 import "./index.css";
+import ParticleBackground from "./ParticleBackground";
 
 function App() {
   return (
-    <div className="bg-slate-950 text-slate-300 min-h-screen w-full overflow-x-hidden">
+    <div className="bg-transparent text-slate-300 min-h-screen w-full overflow-x-hidden relative">
+      <ParticleBackground />
       <HeroAnimation />
       <WorkflowDemo />
       <LatecomerFeature />

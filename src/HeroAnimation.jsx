@@ -16,7 +16,7 @@ export default function HeroAnimation() {
     // By including the class name `bg-slate-950` in this comment, we ensure
     // Tailwind's JIT compiler finds it and generates the corresponding CSS,
     // making it available for @apply in index.css.
-    <section className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white flex items-center relative overflow-hidden">      {/* === THE COMPLETE HYBRID BACKGROUND === */}
+    <section className="min-h-screen bg-transparent text-white flex items-center relative overflow-hidden">      {/* === THE COMPLETE HYBRID BACKGROUND === */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
   
         {/* 1. React Bits: The Foundation (Subtle Grid & Radial Fade) */}

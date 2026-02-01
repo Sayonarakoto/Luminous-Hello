@@ -158,7 +158,7 @@ export default function GatePassScene() {
   }, []);
 
   return (
-    <section className="min-h-[70vh] flex items-center justify-center gap-10 flex-wrap py-20 px-5">
+    <section className="min-h-[70vh] flex items-center justify-center gap-10 flex-wrap py-20 px-5 bg-transparent">
       <div className="flex-1 basis-[320px] max-w-lg">
         <h2 className="text-green-400 mb-4 text-3xl">Gate Pass – Single-Step Approval</h2>
         <AnimatePresence mode="wait">
